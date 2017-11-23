@@ -1,0 +1,15 @@
+@media print 
+{
+    form
+    {
+        display: none;
+    }
+    .Recap
+    {
+        border: 1px solid black;
+        border-radius: 10px;
+        text-align:left;
+        border-radius: 5px;
+        padding:3em;
+    }
+}
