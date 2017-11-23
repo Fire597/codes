@@ -4,6 +4,7 @@
     <title>Scan de codes barres</title>
     <link rel="stylesheet" href="MEP.css" media="screen" type="text/css"/>
     <link rel="stylesheet" href="cssPrint.css" media="print" type="text/css"/>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!--<script src="Javascript.js" type="text/javascript"></script> Fichier css (MiseEnPage)-->
     
     
@@ -16,7 +17,20 @@
     $DateCode = "";
     $TextCodeDate = "";
     
-    
+    // Actions à effectuer si on passe un code $code en POST
+    if (isset($_POST['code'])) {
+        // Code PHP pour Ajax ici
+        $bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', 'root');
+        
+        // On défini la requête à exécuter
+        $ans = $bdd->prepare("SELECT * WHERE Code = ?");
+        // On l'exécute (de manière sécurisée)
+        $ans->execute(array(htmlspecialchars($_POST['code'])));
+        // On récupère les données
+        while ($data = $ans->fetch()) {
+            echo '<h3>' . $data['nom'] . ' - ' . $data['date'] . '</h3><br />';
+        }
+    }
     ?>
     
     
